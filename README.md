@@ -2,8 +2,11 @@ puppet-command_args
 ===================
 
 Convert a hash into command line arguments. The first argument is a hash
-of arguments that should be passed, along with corresponding value. The
-second (optional) argument is the flag prefix to use (defaults to '--').
+of arguments that should be passed, along with corresponding value.
+
+Optional (positional) arguments:
+1. The flag prefix to use (defaults to '--')
+2. The separator to use (defaults to '=')
 
 Example:
 
@@ -20,4 +23,7 @@ command_args($arguments)
 
 command_args($arguments, '-')
 # => -aString=words -secure -array=item1 -array=item2
+
+command_args($arguments, '--', ' ')
+# => --aString words --secure --array item1 --array item2
 ```
