@@ -45,13 +45,23 @@ command_args($arguments, '-')
       flag = '--'
     end
 
+    separator = arguments[2] if arguments[2]
+    if separator
+      unless flag.is_a?(String)
+        raise Puppet::ParseError, ("command_args() third argument must be " +
+              "string if provided, but a #{flag.class} was given.")
+      end
+    else
+      separator = '='
+    end
+
     parameters = ""
 
     hash.map do |k,v|
       if v.is_a?(Array)
         v.each do |item|
           if item.is_a?(String) or item.is_a?(Numeric)
-            parameters << flag + String(k) + '=' + String(item)
+            parameters << flag + String(k) + separator + String(item)
             parameters << ' '
           else
             raise TypeError, ("Arrays can only contain String and Numeric " +
@@ -59,11 +69,11 @@ command_args($arguments, '-')
           end
         end
       elsif v.is_a?(String)
-        parameters << flag + String(k) + '=' + String(v)
+        parameters << flag + String(k) + separator + String(v)
       elsif v.is_a?(TrueClass)
         parameters << flag + String(k)
       elsif v.is_a?(Numeric)
-        parameters << flag + String(k) + '=' + String(v)
+        parameters << flag + String(k) + separator + String(v)
       elsif v.is_a?(FalseClass)
         next
       else
