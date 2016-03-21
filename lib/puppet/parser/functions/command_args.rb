@@ -57,7 +57,7 @@ command_args($arguments, '-')
 
     parameters = ""
 
-    hash.map do |k,v|
+    hash.sort.map do |k,v|
       if v.is_a?(Array)
         v.each do |item|
           if item.is_a?(String) or item.is_a?(Numeric)
