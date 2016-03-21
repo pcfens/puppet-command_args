@@ -1,6 +1,8 @@
 puppet-command_args
 ===================
 
+[![Build Status](https://travis-ci.org/pcfens/puppet-command_args.svg?branch=master)](https://travis-ci.org/pcfens/puppet-command_args)
+
 Convert a hash into command line arguments. The first argument is a hash
 of arguments that should be passed, along with corresponding value.
 
